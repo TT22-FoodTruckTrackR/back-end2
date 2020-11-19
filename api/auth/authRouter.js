@@ -156,7 +156,7 @@ function makeJwt(user){
   };
 
   const options = {
-    expiresIn: '25 seconds'
+    expiresIn: '10 minutes'
   };
 
   return jwt.sign(payload, jwtSecret, options);
