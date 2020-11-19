@@ -1,6 +1,9 @@
 //require dependencies
 const express = require('express');
 const logger = require('./middleware/logger');
+const cors = require('cors');
+const helmet = require('helmet');
+
 
 const restricted = require('./auth/restricted');
 //require routers
@@ -14,6 +17,9 @@ const server = express();
 //use middleware
 server.use(express.json());
 server.use(logger);
+
+server.use(cors());
+server.use(helmet());
 
 //use routers
 server.use('/api/auth', authRouter);

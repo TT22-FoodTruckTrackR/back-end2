@@ -14,6 +14,9 @@ module.exports = (req,res,next) =>{
     console.log('token:', token);
     console.log('secret:', jwtSecret);
     console.log('........')
+    req.userId=decoded.subject;
+    //request now has the user id attached
+
     if (err) {
       console.log(
         'decoded error ->', err.name, 
