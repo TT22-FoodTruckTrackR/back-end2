@@ -17,9 +17,12 @@ const router = express.Router();
 
 //-------------------------------
 
-//endpoints
-//url: PORT/api/trucks
 
+
+
+
+// GET /api/trucks
+//---------------------------------
 router.get('/', restricted, (req,res)=>{
 
   Trucks.getTrucks()
@@ -35,6 +38,28 @@ router.get('/', restricted, (req,res)=>{
       });
     })
 });
+
+
+// GET /api/trucks/:id
+//---------------------------------
+
+router.get('/:id', restricted, (req,res)=>{
+  const id = req.params.id;
+
+  Trucks.getTruckById(id)
+    .then(truck => {
+      res.status(200).json(truck);
+    })
+    .catch(err=>{
+      console.log(err);
+      res.status(500).json({
+        message:'Server error retrieving truck info',
+        errorName:err.name,
+        errorMessage:err.message
+      });
+    })
+});
+
 
 
 //export
