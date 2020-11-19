@@ -140,11 +140,7 @@ router.post('/login/', (req, res, next)=>{
       console.log(err);
       res.status(500).json({name:err.name, message:err.message, stack:err.stack});
     });
-
-  // makeJwt(pendingUser);
-  // next();
 });
-
 
 
 function makeJwt(user){
@@ -156,7 +152,7 @@ function makeJwt(user){
   };
 
   const options = {
-    expiresIn: '10 minutes'
+    expiresIn: '1h'
   };
 
   return jwt.sign(payload, jwtSecret, options);
