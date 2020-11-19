@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "doc": "apidoc -i src -o apidoc-out && apidoc-markdown -p apidoc-out -o DOCUMENTATION.md && rm -rf apidoc-out"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,8 @@
   },
   "homepage": "https://github.com/TT22-FoodTruckTrackR/back-end#readme",
   "devDependencies": {
+    "apidoc": "^0.25.0",
+    "apidoc-markdown": "^5.1.8",
     "eslint": "^7.13.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.6",
