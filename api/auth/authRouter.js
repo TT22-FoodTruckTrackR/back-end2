@@ -92,14 +92,26 @@ router.post('/register/operators', (req, res, next)=>{
 });
 
 
-
-//POST /api/auth/register
+//POST /api/auth/register/diners
 //---------------------------------
 router.post('/register/diners', (req, res, next)=>{
+  const newUser = req.body;
+  newUser.isOperator = 0;
 
-  // *** COPY OPERATORS HERE WHEN DONE ****
-  
-  next();
+  //theoretical env
+  const rounds = process.env.BCRYPT_ROUNDS || 8;
+  const hash = bcrypt.hashSync(newUser.password, rounds);
+  newUser.password = hash;
+
+  Users.addNewUser(newUser)
+    .then(user => {
+      res.status(201).json(user);
+      next();
+    })
+    .catch(err=>{
+      console.log(err);
+      res.status(500).json({message:'Server error retrieving creating new user'});
+    });
 });
 
 
