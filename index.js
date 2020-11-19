@@ -2,7 +2,7 @@
 const server = require('./api/server');
 
 //port
-const PORT = 9900;
+const PORT = process.env.PORT || 9900;
 
 //listen
 server.listen(PORT, ()=>{
