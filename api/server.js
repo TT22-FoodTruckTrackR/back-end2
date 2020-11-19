@@ -1,8 +1,11 @@
 //require dependencies
 const express = require('express');
 const logger = require('./middleware/logger');
+
+const restricted = require('./auth/restricted');
 //require routers
 const authRouter = require('./auth/authRouter');
+const trucksRouter = require('./trucks/trucksRouter');
 
 
 //new server
@@ -14,7 +17,7 @@ server.use(logger);
 
 //use routers
 server.use('/api/auth', authRouter);
-
+server.use('/api/trucks', restricted, trucksRouter)
 
 //default response
 server.get('/', (req,res)=>{

@@ -35,7 +35,11 @@ router.get('/users', (req, res, next)=>{
     })
     .catch(err=>{
       console.log(err);
-      res.status(500).json({message:'Server error retrieving userlist'});
+      res.status(500).json({
+        message:'Server error retrieving userlist',
+        errorName:err.name,
+        errorMessage:err.message,
+      });
     })
 });
 
@@ -49,7 +53,11 @@ router.get('/users/:id', (req, res, next)=>{
     })
     .catch(err=>{
       console.log(err);
-      res.status(500).json({message:'Server error retrieving user'});
+      res.status(500).json({
+        message:'Server error retrieving user',
+        errorName:err.name,
+        errorMessage:err.message,
+      });
     })
 
 })
@@ -87,7 +95,11 @@ router.post('/register/operators', (req, res, next)=>{
     })
     .catch(err=>{
       console.log(err);
-      res.status(500).json({message:'Server error retrieving creating new user'});
+      res.status(500).json({
+        message:'Server error retrieving creating new user',
+        errorName:err.name, 
+        errorMessage:err.message,
+      });
     });
 });
 
@@ -110,7 +122,11 @@ router.post('/register/diners', (req, res, next)=>{
     })
     .catch(err=>{
       console.log(err);
-      res.status(500).json({message:'Server error retrieving creating new user'});
+      res.status(500).json({
+        message:'Server error retrieving creating new user',
+        errorName:err.name, 
+        errorMessage:err.message,
+      });
     });
 });
 
@@ -138,13 +154,13 @@ router.post('/login/', (req, res, next)=>{
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({name:err.name, message:err.message, stack:err.stack});
+      res.status(500).json({
+        message:'Server error logging in',
+        errorName:err.name, 
+        errorMessage:err.message
+      });
     });
-
-  // makeJwt(pendingUser);
-  // next();
 });
-
 
 
 function makeJwt(user){
@@ -156,7 +172,7 @@ function makeJwt(user){
   };
 
   const options = {
-    expiresIn: '10 minutes'
+    expiresIn: '1h'
   };
 
   return jwt.sign(payload, jwtSecret, options);

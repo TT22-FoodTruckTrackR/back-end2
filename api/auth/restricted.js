@@ -10,9 +10,18 @@ module.exports = (req,res,next) =>{
   }
 
   jwt.verify(token, jwtSecret, (err, decoded) => {
+    console.log('........')
+    console.log('token:', token);
+    console.log('secret:', jwtSecret);
+    console.log('........')
     if (err) {
-      console.log('decoded error ->', err);
-      return res.status(401).json({message:'Bad token'});
+      console.log(
+        'decoded error ->', err.name, 
+        '\n', 'message:', err.message, 
+        '\n', 'decoded:', decoded
+        );
+
+      return res.status(401).json({message:'Bad token', token:token, errName:err.name, errMsg:err.message});
     }
 
     console.log('decoded token->', decoded);
