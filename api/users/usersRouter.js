@@ -53,8 +53,26 @@ router.get('/:id', restricted, (req, res, next)=>{
 })
 
 
+// //GET /api/users/trucks/:id
+//---------------------------------
+router.get('/trucks/:id', restricted, (req, res, next)=>{
+  const id = req.params.id;
 
+  Users.ownedTrucks(id)
+    .then(trucks => {
+      res.status(200).json(trucks);
+      next();
+    })
+    .catch(err=>{
+      console.log(err);
+      res.status(500).json({
+        message:'Server error retrieving trucks list',
+        errorName:err.name,
+        errorMessage:err.message,
+      });
+    })
 
+})
 
 //export
 module.exports = router;
