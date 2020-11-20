@@ -5,7 +5,8 @@ module.exports={
   getTrucks,
   getTruckById,
   getTruckByName,
-  addNewTruck
+  addNewTruck,
+  updateTruck,
 }
 
 // GET ALL 
@@ -44,4 +45,14 @@ async function addNewTruck(truck){
 
   // console.log({user:created});
   // return Promise.resolve({user:created});
+}
+
+async function updateTruck(changes, id){
+  await db('trucks')
+    .where('trucks.id', id)
+    .update(changes);
+
+  return db('trucks')
+    .where('trucks.id', id)
+    .first();
 }
