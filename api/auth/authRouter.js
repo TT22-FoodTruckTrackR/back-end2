@@ -111,7 +111,9 @@ router.post('/register/diners', (req, res, next)=>{
   newUser.isOperator = 0;
 
   //theoretical env
-  const rounds = process.env.BCRYPT_ROUNDS || 8;
+  //removed env toggle due to bcrypt "invalid salt version" error
+  const rounds = 12;
+  // console.log(rounds,' bcrypt rounds =============');
   const hash = bcrypt.hashSync(newUser.password, rounds);
   newUser.password = hash;
 
