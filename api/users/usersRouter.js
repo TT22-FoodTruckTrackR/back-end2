@@ -1,5 +1,5 @@
 const express = require('express');
-const Trucks = require('./trucksModel');
+const Users = require('./usersModel');
 
 const restricted = require('../auth/restricted');
 

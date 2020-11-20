@@ -76,7 +76,7 @@ router.get('/:id', restricted, (req,res)=>{
   }
 */
 
-router.post('/', (req, res, next)=>{
+router.post('/', restricted, (req, res, next)=>{
   const newTruck = req.body;
 
   //next: add operator_id as second arg to addNewTruck
@@ -111,7 +111,7 @@ router.post('/', (req, res, next)=>{
   }
 */
 
-router.put('/:id', (req,res)=>{
+router.put('/:id', restricted, (req,res)=>{
   const {id} = req.params;
   const changes = req.body;
 
