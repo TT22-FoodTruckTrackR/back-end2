@@ -5,7 +5,9 @@ module.exports={
   getUsers,
   getUserById,
   getUserByName,
-  addNewUser
+  getUserByEmail,
+  addNewUser,
+  ownedTrucks,
 }
 
 // GET ALL 
@@ -23,6 +25,13 @@ function getUserById(id){
 function getUserByName(username){
   return db('users')
     .where('users.username',username)
+    .first()
+    ;
+}
+
+function getUserByEmail(email){
+  return db('users')
+    .where('users.email',email)
     .first()
     ;
 }
@@ -52,4 +61,13 @@ async function addNewUser(user){
 
   // console.log({user:created});
   // return Promise.resolve({user:created});
+}
+
+//GET TRUCKS OWNED
+async function ownedTrucks(userId){
+  return db('owned_trucks')
+    .join('trucks','owned_trucks.truck_id','trucks.id')
+    .select('trucks.*')
+    .where('owned_trucks.user_id',userId)
+  ;
 }

@@ -23,6 +23,12 @@ exports.seed = function(knex) {
           photoUrl:"https://images.unsplash.com/photo-1567129937968-cdad8f07e2f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1245&q=80",
           location:7,
         },
+        {
+          name:"Bob's Burgers and Fries",
+          type:"Burgers",
+          photoUrl:"https://i.redd.it/ooj01ytz3l121.jpg",
+          location:5,
+        },
       ]);
     });
 };
