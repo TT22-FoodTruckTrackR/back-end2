@@ -90,7 +90,7 @@ router.post('/', (req, res, next)=>{
     .catch(err=>{
       console.log(err);
       res.status(500).json({
-        message:'Server error retrieving creating new user',
+        message:'Server error adding truck',
         errorName:err.name, 
         errorMessage:err.message,
       });
@@ -111,12 +111,23 @@ router.post('/', (req, res, next)=>{
   }
 */
 
-// router.put('/:id', (req,res)=>{
-//   const {id} = req.params;
+router.put('/:id', (req,res)=>{
+  const {id} = req.params;
 
-//   Trucks.updateTruck(id, req.body)
+  Trucks.updateTruck(id, req.body)
+    .then(truck=>{
+      res.status(201).json(truck);
+    })
+    .catch(err=>{
+      console.log(err);
+      res.status(500).json({
+        message:'Server error retrieving updating truck info',
+        errorName:err.name, 
+        errorMessage:err.message,
+      });
+    })
 
-// });
+});
 
 
 
@@ -136,7 +147,7 @@ router.delete('/:id', restricted, (req,res)=>{
   .catch(err=>{
     console.log(err);
     res.status(500).json({
-      message:'Server error retrieving truck info',
+      message:'Server error deleting truck info',
       errorName:err.name,
       errorMessage:err.message
     });
