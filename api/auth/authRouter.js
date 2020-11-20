@@ -5,6 +5,8 @@ const Users = require('../users/usersModel');
 const {jwtSecret} = require('./secrets.js');
 require('dotenv').config();
 
+const {uniqueName, uniqueEmail, validRegister} = require('../users/usersValidate');
+
 const router = express.Router();
 
 // ENDPOINTS
@@ -38,7 +40,7 @@ router.get('/diners', (req, res, next)=>{
 
 //POST /api/auth/register/operators
 //---------------------------------
-router.post('/register/operators', (req, res, next)=>{
+router.post('/register/operators', validRegister, uniqueName, uniqueEmail, (req, res, next)=>{
   const newUser = req.body;
   newUser.isOperator = 1;
 
@@ -65,7 +67,7 @@ router.post('/register/operators', (req, res, next)=>{
 
 //POST /api/auth/register/diners
 //---------------------------------
-router.post('/register/diners', (req, res, next)=>{
+router.post('/register/diners', validRegister, uniqueName, uniqueEmail, (req, res, next)=>{
   const newUser = req.body;
   newUser.isOperator = 0;
 

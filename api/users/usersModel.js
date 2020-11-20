@@ -5,6 +5,7 @@ module.exports={
   getUsers,
   getUserById,
   getUserByName,
+  getUserByEmail,
   addNewUser,
   ownedTrucks,
 }
@@ -24,6 +25,13 @@ function getUserById(id){
 function getUserByName(username){
   return db('users')
     .where('users.username',username)
+    .first()
+    ;
+}
+
+function getUserByEmail(email){
+  return db('users')
+    .where('users.email',email)
     .first()
     ;
 }
