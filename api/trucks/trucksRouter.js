@@ -113,8 +113,9 @@ router.post('/', (req, res, next)=>{
 
 router.put('/:id', (req,res)=>{
   const {id} = req.params;
+  const changes = req.body;
 
-  Trucks.updateTruck(id, req.body)
+  Trucks.updateTruck(changes, id)
     .then(truck=>{
       res.status(201).json(truck);
     })
