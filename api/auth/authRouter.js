@@ -21,47 +21,6 @@ user
 */
 
 
-// //---------
-// //TESTING: GET ALL USERS
-// //---------
-
-// //GET /api/auth/users
-//---------------------------------
-router.get('/users', (req, res, next)=>{
-  Users.getUsers()
-    .then(users => {
-      res.status(200).json(users);
-      next();
-    })
-    .catch(err=>{
-      console.log(err);
-      res.status(500).json({
-        message:'Server error retrieving userlist',
-        errorName:err.name,
-        errorMessage:err.message,
-      });
-    })
-});
-
-router.get('/users/:id', (req, res, next)=>{
-  const id = req.params.id;
-
-  Users.getUserById(id)
-    .then(user => {
-      res.status(200).json(user);
-      next();
-    })
-    .catch(err=>{
-      console.log(err);
-      res.status(500).json({
-        message:'Server error retrieving user',
-        errorName:err.name,
-        errorMessage:err.message,
-      });
-    })
-
-})
-
 // //GET /api/auth/diners
 //---------------------------------
 router.get('/diners', (req, res, next)=>{

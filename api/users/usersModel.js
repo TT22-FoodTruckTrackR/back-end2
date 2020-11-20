@@ -5,7 +5,8 @@ module.exports={
   getUsers,
   getUserById,
   getUserByName,
-  addNewUser
+  addNewUser,
+  ownedTrucks,
 }
 
 // GET ALL 
@@ -52,4 +53,13 @@ async function addNewUser(user){
 
   // console.log({user:created});
   // return Promise.resolve({user:created});
+}
+
+//GET TRUCKS OWNED
+async function ownedTrucks(userId){
+  return db('owned_trucks')
+    .join('trucks','owned_trucks.truck_id','trucks.id')
+    .select('trucks.*')
+    .where('owned_trucks.user_id',userId)
+  ;
 }

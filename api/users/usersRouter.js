@@ -3,15 +3,18 @@ const Users = require('./usersModel');
 
 const restricted = require('../auth/restricted');
 
-
-
 //new router
 const router = express.Router();
 
 
+
+// //---------
+// //TESTING: GET ALL USERS
+// //---------
+
 // //GET /api/users
 //---------------------------------
-router.get('/users', (req, res, next)=>{
+router.get('/', restricted, (req, res, next)=>{
   Users.getUsers()
     .then(users => {
       res.status(200).json(users);
@@ -26,6 +29,31 @@ router.get('/users', (req, res, next)=>{
       });
     })
 });
+
+
+// //GET /api/users/:id
+//---------------------------------
+router.get('/:id', restricted, (req, res, next)=>{
+  const id = req.params.id;
+
+  Users.getUserById(id)
+    .then(user => {
+      res.status(200).json(user);
+      next();
+    })
+    .catch(err=>{
+      console.log(err);
+      res.status(500).json({
+        message:'Server error retrieving user',
+        errorName:err.name,
+        errorMessage:err.message,
+      });
+    })
+
+})
+
+
+
 
 
 //export

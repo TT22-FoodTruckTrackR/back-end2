@@ -9,6 +9,7 @@ const restricted = require('./auth/restricted');
 //require routers
 const authRouter = require('./auth/authRouter');
 const trucksRouter = require('./trucks/trucksRouter');
+const usersRouter = require('./users/usersRouter');
 
 
 //new server
@@ -24,6 +25,7 @@ server.use(helmet());
 //use routers
 server.use('/api/auth', authRouter);
 server.use('/api/trucks', restricted, trucksRouter)
+server.use('/api/users', restricted, usersRouter)
 
 //default response
 server.get('/', (req,res)=>{
